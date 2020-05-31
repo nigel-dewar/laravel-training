@@ -1942,6 +1942,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1949,12 +1952,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      bookables: null
+      bookables: null,
+      loading: false
     };
   },
   created: function created() {
     var _this = this;
 
+    this.loading = true;
     console.log('created');
     setTimeout(function () {
       _this.bookables = [{
@@ -1964,6 +1969,7 @@ __webpack_require__.r(__webpack_exports__);
         title: 'a mediam villa',
         content: 'a medium price villa'
       }];
+      _this.loading = false;
     }, 2000);
   },
   mounted: function mounted() {
@@ -37593,12 +37599,13 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm.bookables !== null
-    ? _c(
+  return _vm.loading
+    ? _c("div", [_vm._v("\n    Data is loading...\n")])
+    : _c(
         "div",
-        _vm._l(_vm.bookables, function(bookable) {
+        _vm._l(_vm.bookables, function(bookable, index) {
           return _c("BookablesListItem", {
-            key: bookable.title,
+            key: index,
             attrs: {
               "item-title": bookable.title,
               "item-content": bookable.content,
@@ -37608,7 +37615,6 @@ var render = function() {
         }),
         1
       )
-    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
